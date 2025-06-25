@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="732dp"
+    android:background="@drawable/sc1"
+    tools:context=".screen1">
+
+
+
+    <TextView
+        android:id="@+id/tvv1"
+        android:layout_width="400dp"
+        android:layout_height="350dp"
+        android:gravity="bottom"
+        android:text="VISIT"
+        android:textAlignment="center"
+        android:textColor="#EA034D46"
+        android:textSize="70sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tvv2"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:text="with us!!"
+        android:textAlignment="center"
+        android:textColor="#A71D1515"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/scbtn1"
+        android:layout_width="402dp"
+        android:layout_height="322dp"
+        android:layout_gravity="right"
+        android:backgroundTint="@color/cardview_shadow_end_color"
+        android:gravity="bottom"
+        android:text="Next>>>"
+        android:textColor="#000000"
+        android:textSize="25dp" />
+
+
+
+</LinearLayout>
