@@ -20,12 +20,17 @@ class layout2 : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-btn=findViewById(R.id.layoutt)
+        btn = findViewById(R.id.layoutt)
         btn?.setOnClickListener {
             Toast.makeText(this, "on click message displayed", Toast.LENGTH_SHORT).show()
             var intent = Intent(this, screen3::class.java)
             startActivity(intent)
         }
+        btn = findViewById<Button>(R.id.btnRecyclerActivity)
+        btn?.setOnClickListener {
+            var intent = Intent(this, RecyclerActivity::class.java)
+            startActivity(intent)
 
+        }
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textclass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="text class"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/nm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Name"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/textclass"
+        android:layout_marginTop="40sp"/>
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Description"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/nm"
+        android:layout_marginTop="80sp"/>
+
+
+    <Button
+        android:id="@+id/btnupdate"
+        android:layout_width="168dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:text="update"
+        app:layout_constraintBottom_toTopOf="@id/btndelete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc"
+        app:layout_constraintVertical_bias="0.906" />
+
+    <Button
+        android:id="@+id/btndelete"
+        android:layout_width="168dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="24dp"
+        android:text="delete"
+        app:layout_constraintBottom_toBottomOf="@id/btnupdate"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

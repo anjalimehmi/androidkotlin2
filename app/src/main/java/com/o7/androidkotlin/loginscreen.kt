@@ -29,10 +29,10 @@ class loginscreen : AppCompatActivity() {
             btnlogin.setOnClickListener {
                 if (email.text.toString().isEmpty()) {
                     email.error = "Please enter your email"
-                } else if (pass.text.toString().isEmpty())else {
+                } else if (edtPassword.text.toString().isEmpty())else {
                     val emailtext = binding.email.text.toString().trim()
-                    val passwordtext =binding.pass.text.tostring().trim()
-                    auth.signInWithEmailAndPassword(email,password)
+                    val passwordtext =binding.edtPassword.text.toString().trim()
+                    firebaseAuth.signInWithEmailAndPassword(emailtext,passwordtext)
                         .addOnSuccessListener {
                             Toast.makeText(
                                 this@loginscreen,

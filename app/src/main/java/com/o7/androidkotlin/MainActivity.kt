@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class linearlayout : AppCompatActivity() {
+class Linearlayout : AppCompatActivity() {
     var btn: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.linearlayout)
+        setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -29,7 +29,12 @@ class linearlayout : AppCompatActivity() {
         btn = findViewById(R.id.button3)
         btn?.setOnClickListener {
             Toast.makeText(this, "fill your details", Toast.LENGTH_SHORT).show()
-            var intent = Intent(this, linearlayout::class.java)
+            var intent = Intent(this, layout2::class.java)
+            startActivity(intent)
+        }
+        btn=findViewById<Button>(R.id.btnRecyclerActivity)
+        btn?.setOnClickListener {
+            var intent= Intent(this, RecyclerActivity::class.java)
             startActivity(intent)
         }
     }
