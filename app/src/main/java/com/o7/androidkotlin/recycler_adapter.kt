@@ -7,14 +7,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
- class recycler_adapter(var list: ArrayList<rc_dataclass>)
+ class recycler_adapter(var list: ArrayList<rc_dataclass>
+ ,var clickInterface: OnClick)
     : RecyclerView.Adapter<recycler_adapter.Viewholder>(){
      class Viewholder (var view: View): RecyclerView.ViewHolder(view){
          var name=view.findViewById<TextView>(R.id.nm)
          var update=view.findViewById<Button>(R.id.btnupdate)
          var delete=view.findViewById<Button>(R.id.btndelete)
      }
-     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): recycler_adapter.Viewholder  {
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): recycler_adapter.Viewholder{
          var view= LayoutInflater.from(parent.context).inflate(R.layout.rcitemlayout,parent,false)
          return Viewholder(view)
      }
@@ -23,10 +24,13 @@ import androidx.recyclerview.widget.RecyclerView
          holder.apply {
              name.setText(list[position].title)
              update.setOnClickListener{
-//                clickInterface.update(position)
+                clickInterface.update(position)
              }
              delete.setOnClickListener{
-//                clickInterface.delete(position)
+                clickInterface.delete(position)
+             }
+             view.setOnClickListener {
+                 clickInterface.onItemClick(position)
              }
          }
      }
@@ -37,11 +41,7 @@ import androidx.recyclerview.widget.RecyclerView
      interface OnClick{
          fun update(position: Int)
          fun delete(position: Int)
+         fun onItemClick(position: Int)
      }
-
-
-
-
-
 }
 

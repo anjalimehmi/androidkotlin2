@@ -134,11 +134,11 @@
             android:id="@+id/button10"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:backgroundtint="@drawable/scc3"
+            android:background="@drawable/scc3"
             android:gravity="left"
             android:text="sign up"
-            tools:layout_editor_absoluteX="181dp"
-            tools:layout_editor_absoluteY="422dp" />
+
+             />
 
     </LinearLayout>
 
