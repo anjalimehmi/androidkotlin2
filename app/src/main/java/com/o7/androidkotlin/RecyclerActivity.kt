@@ -11,12 +11,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import com.o7.androidkotlin.databinding.ActivityRecyclerBinding
 
 class RecyclerActivity : AppCompatActivity(), recycler_adapter.OnClick {
     lateinit var binding: ActivityRecyclerBinding
     lateinit var recyclerAdapter: recycler_adapter
     var Noteslist= arrayListOf<rc_dataclass>()
+
+    val db = Firebase.firestore
+    var collectionName="Users"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,13 +32,15 @@ class RecyclerActivity : AppCompatActivity(), recycler_adapter.OnClick {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        Noteslist.add(rc_dataclass(title = "1", description = "My description"))
-        Noteslist.add(rc_dataclass(title = "2", description = "My description"))
-        Noteslist.add(rc_dataclass(title = "3", description = "My description"))
+        Noteslist.add(rc_dataclass(title = "My title", description = "My description"))
+        Noteslist.add(rc_dataclass(title = "My name", description = "My description"))
+        Noteslist.add(rc_dataclass(title = "description", description = "My description"))
         recyclerAdapter= recycler_adapter(Noteslist,this)
         binding.rcview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         binding.rcview.adapter=recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
+
+        
         binding.flbtn.setOnClickListener {
             var dialog= Dialog(this)
 
