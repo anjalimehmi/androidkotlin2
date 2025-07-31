@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -80,8 +81,19 @@ class RecyclerActivity : AppCompatActivity(), recycler_adapter.OnClick {
     }
 
     override fun delete(position: Int) {
-        Noteslist.removeAt(position)
-        Toast.makeText(this,"Delete clicked", Toast.LENGTH_SHORT).show()
+        AlertDialog.Builder(this).apply {
+            setTitle("Delete")
+            setMessage("Are you sure you want to delete this item?")
+            setPositiveButton("yes"){ _,_->
+                Noteslist.removeAt(position)
+                Toast.makeText(this@RecyclerActivity,"Delete clicked", Toast.LENGTH_SHORT).show()
+            }
+            setNegativeButton("no") { _,_->}
+            setNeutralButton("Cancel") { _,_-> }
+            setCancelable(true)
+            show()
+        }
+
     }
 
     override fun onItemClick(position: Int){

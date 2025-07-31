@@ -1,5 +1,6 @@
 package com.o7.androidkotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,13 +11,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.o7.androidkotlin.databinding.ActivitySignupscreenBinding
 
 class Signupscreen : AppCompatActivity() {
-    lateinit var binding: ActivitySignupscreenBinding
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val TAG = "LoginActivity"
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var binding: ActivitySignupscreenBinding
+    private lateinit var firebaseAuth: FirebaseAuth
+    override fun onCreate(savedInstanceState: Bundle?) {0
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_signupscreen)
+
         binding = ActivitySignupscreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -24,36 +24,36 @@ class Signupscreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        binding.login.setOnClickListener {
-            if (binding.edtemail.text.toString().isNullOrEmpty()) {
-                binding.tilemail.isErrorEnabled = true
-                binding.tilemail.error = "Enter Email"
-            } else if (binding.edtPassword.text.toString().isNullOrEmpty()) {
-                binding.tilPassword.isErrorEnabled = true
-                binding.tilPassword.error = "Enter Password"
-            } else {
+        firebaseAuth= FirebaseAuth.getInstance()
 
-                auth.createUserWithEmailAndPassword(
-                    binding.edtemail.text.toString(),
-                    binding.edtPassword.text.toString()
-                )
-                    .addOnCompleteListener(this) { task ->
-                        val user = auth.currentUser
-                        if (task.isSuccessful) {
-                            Toast.makeText(this, "Completed Successful${user?.email}", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this, "Registration failed${user?.email}", Toast.LENGTH_SHORT).show()
+        binding.btnsignup.setOnClickListener {
+            var email=binding.edtemail.text.toString()
+            var password= binding.edtPassword.text.toString()
+
+            if (email.isNotEmpty() && password.isNotEmpty()){
+                firebaseAuth.createUserWithEmailAndPassword(email,password)
+                    .addOnCompleteListener(this){task ->
+                        if (task.isSuccessful){
+                            Toast.makeText(this,"Sign up successful", Toast.LENGTH_SHORT).show()
+                            var intent= Intent(this, screen4::class.java)
+                            startActivity(intent)
+                            finish()
+                        }else{
+                            Toast.makeText(this,"signup unsuccessful", Toast.LENGTH_SHORT).show()
                         }
-                    }
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT)
 
                     }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Failed to Register", Toast.LENGTH_SHORT)
-
-                    }
+            }else{
+                Toast.makeText(this,"Please enter your password", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-}
+        binding.Loginhere.setOnClickListener {
+            var intent= Intent(this, loginscreen::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
+
+            }
+        }

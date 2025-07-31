@@ -1,8 +1,10 @@
 package com.o7.androidkotlin
 
 import android.R.attr.password
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputBinding
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,29 +26,34 @@ class loginscreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        firebaseAuth = FirebaseAuth.getInstance()
-        binding.apply {
-            btnlogin.setOnClickListener {
-                if (email.text.toString().isEmpty()) {
-                    email.error = "Please enter your email"
-                } else if (edtPassword.text.toString().isEmpty())else {
-                    val emailtext = binding.email.text.toString().trim()
-                    val passwordtext =binding.edtPassword.text.toString().trim()
-                    firebaseAuth.signInWithEmailAndPassword(emailtext,passwordtext)
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                this@loginscreen,
-                                "user login successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        .addOnFailureListener {e->
-                            Toast.makeText(this@loginscreen, "login failed", Toast.LENGTH_SHORT)
-                                .show()
 
+        firebaseAuth = FirebaseAuth.getInstance()
+        binding.btnlogin.setOnClickListener {
+
+            val email=binding.email.text.toString()
+            val password=binding.edtPassword.text.toString()
+
+
+            if (email.isNotEmpty() && password.isNotEmpty()){
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+
+
+                    .addOnCompleteListener(this){task ->
+
+                        if (task.isSuccessful){
+                            Toast.makeText(this,"Login successful", Toast.LENGTH_SHORT).show()
+                            val intent= Intent(this, screen4::class.java)
+                            startActivity(intent)
+                            finish()
+                        }else{
+                            Toast.makeText(this,"Login failed", Toast.LENGTH_SHORT).show()
                         }
-                }
+                    }
+
+            }else
+            {
+                Toast.makeText(this,"Please enter your email and password", Toast.LENGTH_SHORT).show()
+            }
             }
         }
     }
-}
